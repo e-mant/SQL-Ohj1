@@ -282,3 +282,64 @@ select name from goal where id not in(select goal.id from goal, goal_reached, ga
 
 ![image](https://github.com/user-attachments/assets/c0d39cff-0c57-45c7-8816-4a667d308c49)
 
+# OSIO 4: Koostetieto kyselyt harjoitukset
+
+### Tehtävä 1
+
+select max(elevation_ft) from airport;
+
+![image](https://github.com/user-attachments/assets/fe4b2f99-5475-43f3-9e63-1cb06aee2c93)
+
+### Tehtävä 2
+
+select continent, count(*) from country group by continent;
+
+![image](https://github.com/user-attachments/assets/f4098822-e00f-4121-a3a3-11d7701f37d8)
+
+### Tehtävä 3
+
+select screen_name, count(*) from game, goal_reached where id = game_id group by screen_name;
+
+![image](https://github.com/user-attachments/assets/9b243d61-c446-4ee0-bd59-7bbcefcc05a5)
+
+### Tehtävä 4
+
+select screen_name from game where co2_consumed in(select min(co2_consumed) from game);
+
+![image](https://github.com/user-attachments/assets/711daa07-0ec2-42c5-afc5-669ad15bce39)
+
+## Tehtävä 5
+
+select country.name, count(*) from airport, country where airport.iso_country = country.iso_country group by country.iso_country order by count(*) desc limit 50;
+
+![image](https://github.com/user-attachments/assets/214188e1-cd22-4cbe-902c-aa0a9ed8b6be)
+
+### Tehtävä 6
+
+select country.name from airport, country where airport.iso_country = country.iso_country group by country.iso_country having count(*) > 1000;
+
+![image](https://github.com/user-attachments/assets/89b162b2-9647-484e-83d9-e9b086de835f)
+
+### Tehtävä 7
+
+select name from airport where elevation_ft in (select max(elevation_ft)from airport);
+
+![image](https://github.com/user-attachments/assets/59e6e161-7ae3-49db-9878-9389fc0fd54e)
+
+### Tehtävä 8
+
+select name from country where iso_country in (select iso_country from airport where elevation_ft in(select max(elevation_ft)from airport));
+
+![image](https://github.com/user-attachments/assets/6ee4bd3b-6f36-4fa9-a35b-e5041d72af55)
+
+### Tehtävä 9
+
+select count(*) from game, goal_reached where id = game_id and screen_name = "Vesa" group by screen_name;
+
+![image](https://github.com/user-attachments/assets/8acfe4d8-324f-4e89-9a6f-9b0e904815a4)
+
+### Tehtävä 10
+
+select name from airport where latitude_deg in(select min(latitude_deg)from airport);
+
+![image](https://github.com/user-attachments/assets/18284111-127f-426d-9bc3-7f3645fb8d7a)
