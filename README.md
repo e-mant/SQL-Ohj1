@@ -1,3 +1,3 @@
-# SQL-Ohj1
+# tietokannat
 
-SQL-kurssin tehtävät Ohjelmisto 1. 
+SQL-kurssin tehtävät Ohjelmisto 1:stä. 
