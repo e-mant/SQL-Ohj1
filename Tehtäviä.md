@@ -1,4 +1,4 @@
-# OSIO 2: Relaatiotietokannan peruskäsitteiden harjoitukset
+# OSIO 1: Relaatiotietokannan peruskäsitteiden harjoitukset
 
 ### Tehtävä 1
 
@@ -100,7 +100,7 @@ vastaus: goal_id, game_id
 
 vastaus: 2
 
-# OSIO 3: Yhteen tauluun kohdistuvien kyselyiden harjoitukset
+# OSIO 2: Yhteen tauluun kohdistuvien kyselyiden harjoitukset
 
 ### Tehtävä 1
 
@@ -156,7 +156,7 @@ select distinct co2_budget from game;
 
 ![image](https://github.com/user-attachments/assets/4be1f833-afdf-43ef-ad7d-ad7106f7711d)
 
-# OSIO 4: Where-osan liitosehto harjoitukset
+# OSIO 2: Where-osan liitosehto harjoitukset
 
 ### Tehtävä 1
 
@@ -218,5 +218,67 @@ select country.name from country, airport, game, goal, goal_reached where airpor
 
 ![image](https://github.com/user-attachments/assets/c8055cc0-c5bd-4cd0-bace-375610c08101)
 
+# OSIO 3: Join harjoitukset
 
+### Tehtävä 1
+
+select country.name as "country name", airport.name as "airport name" from country inner join airport on airport.iso_country = country.iso_country where country.name = "Finland" and scheduled_service = "yes";
+
+![image](https://github.com/user-attachments/assets/e40bd40f-f86d-4705-a7e2-4443330281e3)
+
+### Tehtävä 2
+
+select screen_name, airport.name from game inner join airport on location = ident;
+
+![image](https://github.com/user-attachments/assets/2199cd09-52e6-4087-8016-270187df748d)
+
+### Tehtävä 3
+
+select screen_name, country.name from game inner join airport on location = ident inner join country on airport.iso_country = country.iso_country;
+
+![image](https://github.com/user-attachments/assets/9c849268-9283-45b3-a4d8-636692e0c951)
+
+### Tehtävä 4
+
+select airport.name, screen_name from airport left join game on ident = location where name like "%Hels%";
+
+![image](https://github.com/user-attachments/assets/67360b2e-970d-41c3-826e-662961ed05bc)
+
+### Tehtävä 5
+
+select name, screen_name from goal left join goal_reached on goal.id = goal_id  left join game on game.id = game_id;
+
+![image](https://github.com/user-attachments/assets/0c35eb67-e555-4875-b763-0f677765f03a)
+
+# OSIO 3: Sisäkysely harjoitukset 
+
+### Tehtävä 1
+
+select name from country where iso_country in(select iso_country from airport where name like "Satsuma%");
+
+![image](https://github.com/user-attachments/assets/eeacd7a5-2b49-454d-b38a-ed88df847d8e)
+
+### Tehtävä 2
+
+select name from airport where iso_country in(select iso_country from country where name = "Monaco");
+
+![image](https://github.com/user-attachments/assets/12d84bde-6ea8-4e09-bbe6-a6f5dd08bb49)
+
+### Tehtävä 3
+
+select screen_name from game where id in (select game_id from goal_reached where goal_id in(select id from goal where name = "CLOUDS"));
+
+![image](https://github.com/user-attachments/assets/611a0dcb-5bd0-4ad3-ba33-9f24238f9c27)
+
+### Tehtävä 4
+
+select country.name from country where iso_country not in(select airport.iso_country from airport);
+
+![image](https://github.com/user-attachments/assets/f206662f-8f86-4d63-99f2-1da845215c3d)
+
+### Tehtävä 5
+
+select name from goal where id not in(select goal.id from goal, goal_reached, game where game.id = game_id and goal.id = goal_id and screen_name = "Heini");
+
+![image](https://github.com/user-attachments/assets/c0d39cff-0c57-45c7-8816-4a667d308c49)
 
